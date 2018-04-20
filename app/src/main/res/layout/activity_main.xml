@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/milky"
+    tools:context="com.example.admin.mp3appmusic.MainActivity">
+
+    <Button
+        android:id="@+id/btn_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/seekBar"
+        android:layout_alignRight="@+id/seekBar"
+        android:layout_alignTop="@+id/tv_tittle"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:text="Download" />
+    <ListView
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_above="@+id/tv_end"
+        android:layout_below="@+id/tv_tittle"
+        android:id="@+id/listView"></ListView>
+    <TextView
+        android:id="@+id/tv_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên bài hát"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:layout_margin="15dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="23dp" />
+    <ImageButton
+        android:background="@null"
+        android:id="@+id/btn_next"
+        android:src="@drawable/next"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        tools:layout_editor_absoluteY="415dp"
+        tools:layout_editor_absoluteX="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <ImageButton
+        android:background="@null"
+        android:src="@drawable/play_1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        tools:layout_editor_absoluteY="415dp"
+        tools:layout_editor_absoluteX="103dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:id="@+id/btn_play"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btn_prv"
+        android:layout_toEndOf="@+id/btn_prv" />
+    <ImageButton
+        android:background="@null"
+        android:src="@drawable/stop_2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        tools:layout_editor_absoluteY="415dp"
+        tools:layout_editor_absoluteX="194dp"
+        android:id="@+id/btn_stop"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btn_next"
+        android:layout_toStartOf="@+id/btn_next"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp" />
+    <ImageButton
+        android:background="@null"
+        android:src="@drawable/prv"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        tools:layout_editor_absoluteY="415dp"
+        tools:layout_editor_absoluteX="288dp"
+        android:id="@+id/btn_prv"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/tv_tittle"
+        android:layout_alignStart="@+id/tv_tittle" />
+<SeekBar
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="8dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:id="@+id/seekBar"
+    android:layout_above="@+id/btn_next"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:layout_marginBottom="19dp" />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_marginBottom="28dp"
+        android:layout_alignBottom="@+id/seekBar"
+        android:layout_alignLeft="@+id/tv_tittle"
+        android:layout_alignStart="@+id/tv_tittle"
+        android:id="@+id/tv_start" />
+    <TextView
+        android:id="@+id/tv_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/tv_start"
+        android:layout_alignBottom="@+id/tv_start"
+        android:layout_alignRight="@+id/seekBar"
+        android:layout_alignEnd="@+id/seekBar"
+        />
+
+</RelativeLayout>
