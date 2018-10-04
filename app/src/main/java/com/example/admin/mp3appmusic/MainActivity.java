@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.RenderProcessGoneDetail;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -46,24 +47,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Uri music_uri = Uri.parse("https://zmp3-mp3-s1-te-vnno-zn-5.zadn.vn/de0f10f2c8b621e878a7/8028330437800394190?authen=exp=1522295016~acl=/de0f10f2c8b621e878a7/*~hmac=ae915fe3e14042db4376470a5f0e3d5f&filename=Dung-Ai-Nhac-Ve-Anh-Ay-Tra-My-Idol.mp3");
+        final Uri music_uri = Uri.parse("https://drive.google.com/open?id=1OAaCXCthjcuYBJ53UuP5K0eDQxb26EhL");
 
-        btnDownload= (Button) findViewById(R.id.btn_down);
-         tvStart= (TextView) findViewById(R.id.tv_start);
-         tvEnd= (TextView) findViewById(R.id.tv_end);
-         seekBar= (SeekBar) findViewById(R.id.seekBar);
-         btnNext= (ImageButton) findViewById(R.id.btn_next);
-         btnPlay= (ImageButton) findViewById(R.id.btn_play);
-       btnStop= (ImageButton) findViewById(R.id.btn_stop);
-        btnPre= (ImageButton) findViewById(R.id.btn_prv);
-        tvTittle= (TextView) findViewById(R.id.tv_tittle);
-        listView= (ListView) findViewById(R.id.listView);
-       // Addsongfromsdcard();
+        btnDownload= findViewById(R.id.btn_down);
+        tvStart= findViewById(R.id.tv_start);
+        tvEnd=  findViewById(R.id.tv_end);
+        seekBar= findViewById(R.id.seekBar);
+        btnNext=  findViewById(R.id.btn_next);
+        btnPlay= findViewById(R.id.btn_play);
+        btnStop=  findViewById(R.id.btn_stop);
+        btnPre=  findViewById(R.id.btn_prv);
+        tvTittle=  findViewById(R.id.tv_tittle);
+        listView= findViewById(R.id.listView);
         AddSong();
-
-
-
-
+        KhoitaoMediaplayer();
+        listView.getVisibility();
        // tạo file
        folderMusic = "/sdcard/mp3song/";
        File folder = new File(folderMusic);
@@ -128,15 +126,13 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                KhoitaoMediaplayer();
-                mediaPlayer.start();
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     btnPlay.setImageResource(R.drawable.play_1);
                 } else {
                         mediaPlayer.start();
                         btnPlay.setImageResource(R.drawable.pause_1);
+
                         SetTimeTotal();
                         UpdateTimeSong();
 
@@ -161,25 +157,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       Listnhac();
-        GetListAudio();
     }
 
-//    private void playLocalAudio_UsingDescriptor(String audioPath) {
-//        AssetFileDescriptor fileDesc = getResources().openRawResourceFd(MainActivity.this, );
-//        String mp3path  = Environment.getExternalStoragePublicDirectory(folderMusic).getPath()+"/" + "lastfile.mp3";
-//        if (fileDesc != null) {
-//            mediaPlayer = new MediaPlayer();
-//            try {
-//                mediaPlayer.setDataSource(fileDesc.getFileDescriptor(), fileDesc
-//                        .getStartOffset(), fileDesc.getLength());
-//                mediaPlayer.prepare();
-//                mediaPlayer.start();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     private void UpdateTimeSong(){
         final Handler handler = new Handler();
@@ -224,25 +203,7 @@ public class MainActivity extends AppCompatActivity {
     private void KhoitaoMediaplayer(){
         mediaPlayer= MediaPlayer.create(MainActivity.this, arraySong.get(positon).getFile());
         tvTittle.setText(arraySong.get(positon).getTittle());
-        /*mediaPlayer.stop();
-        String mp3path  = Environment.getExternalStoragePublicDirectory(folderMusic).getPath()+"/" + "lastfile.mp3";
-        mediaPlayer = MediaPlayer.create(MainActivity.this, Uri.parse(mp3path));*/
-
-
-
     }
-
-   /* private void Addsongfromsdcard(){
-
-        try {
-            AssetFileDescriptor afd = getAssets().openFd(folderMusic);
-        mediaPlayer.setDataSource(afd.getFileDescriptor());
-        mediaPlayer.prepare();
-        mediaPlayer.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     private void SetTimeTotal(){
         SimpleDateFormat dinhdangphut = new SimpleDateFormat("mm:ss");  // chuyển tổng thời gian bài hát sang dạng phút: giây
@@ -250,19 +211,6 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setMax(mediaPlayer.getDuration()); // set tổng thời gian thanh seekbar = duration bài hát.
     }
 
-
-
-//    private void playLocalAudio_UsingDescriptor() throws Exception {
-//        AssetFileDescriptor fileDesc = getResources().openRawResourceFd(Integer.parseInt(folderMusic));
-//        if (fileDesc != null) {
-//            mediaPlayer = new MediaPlayer();
-//            mediaPlayer.setDataSource(fileDesc.getFileDescriptor(), fileDesc
-//                    .getStartOffset(), fileDesc.getLength());
-//
-//            mediaPlayer.prepare();
-//            mediaPlayer.start();
-//        }
-//        }
     private long DownloadData (Uri uri, View v) {
 
         final long downloadReference;
@@ -281,50 +229,7 @@ public class MainActivity extends AppCompatActivity {
                 downloadReference = downloadManager.enqueue(request);
                 return downloadReference;
                 //file:///storage/emulated/0/sdcard/mp3song/lastfile.mp3
-            }
-
-
-//    public void getPublicAlbumStorageDir() {
-//        File file;
-//        FileOutputStream fos;
-//
-//        try {
-//            file = new File(Environment.getExternalStorageDirectory(),"mp3Album");
-//            fos = new FileOutputStream(file);
-//            Log.d("MainActivity", Environment.getExternalStorageDirectory().getAbsolutePath());
-//            fos.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-    public void getMusic(){
-        ContentResolver contentResolver = getContentResolver();
-        Uri uri= Uri.parse(folderMusic);
-        //Uri uri= MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor Songcursor= null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            Songcursor = contentResolver.query(uri,null,null,null,null,null);
         }
-        if (Songcursor!=null){
-            Songcursor.moveToFirst();
-            int songtitle=Songcursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
-            do {
-                String song2 = Songcursor.getString(songtitle);
-                arrayList.add(song2);
-            }
-            while (Songcursor.moveToNext());
-
-        }
-
-    }
-    public void Listnhac(){
-        arrayList =new ArrayList<>();
-        getMusic();
-        adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
-        listView.setAdapter(adapter);
-    }
-
 
 
     //Retrieve a list of Music files currently listed in the Media store DB via URI.
